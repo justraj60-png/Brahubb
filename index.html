@@ -1,425 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>BRAHUBB — Lingerie & Innerwear</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clovia Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;color:#292327;background:#fff}
-a{text-decoration:none;color:inherit}
-.top{background:#5a1f32;color:#fff;text-align:center;padding:9px;font-size:11px;letter-spacing:1px}
-header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:50}
-.logo{font:700 31px Georgia;color:#5a1f32}
-.search{width:38%;height:40px;border:1px solid #ddd;padding:0 16px;border-radius:3px;outline:0}
-.icons{display:flex;gap:18px;font-size:20px}
-nav{height:50px;display:flex;justify-content:center;gap:30px;align-items:center;border-bottom:1px solid #eee;overflow:auto;white-space:nowrap}
-nav a{font-size:12px;font-weight:bold}
-.sale{color:#c85c72}
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            border-bottom: 1px solid #eee;
+        }
 
-.hero{
-height:470px;
-background:linear-gradient(100deg,#f8e7ea,#fff9f6);
-display:flex;
-align-items:center;
-padding:50px 8%;
-}
-.hero small{color:#c85c72;letter-spacing:3px;font-weight:bold}
-.hero h1{font:700 clamp(45px,7vw,76px) Georgia;color:#5a1f32;line-height:1;margin:18px 0}
-.hero p{max-width:500px;color:#6b6065;line-height:1.7;margin-bottom:25px}
-.btn{display:inline-block;background:#5a1f32;color:#fff;padding:14px 28px;font-size:12px;font-weight:bold}
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            font-family: 'Georgia', serif;
+        }
 
-.section{padding:55px 5%}
-.title{text-align:center;margin-bottom:30px}
-.title span{color:#c85c72;font-size:11px;letter-spacing:2px;font-weight:bold}
-.title h2{font:700 36px Georgia;color:#5a1f32;margin-top:8px}
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
 
-.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.cat{height:190px;background:#f7e5e9;display:flex;align-items:end;padding:20px}
-.cat:nth-child(2){background:#f1e5dc}
-.cat:nth-child(3){background:#e9dfe6}
-.cat:nth-child(4){background:#f3e8d8}
-.cat:nth-child(5){background:#ead8de}
-.cat h3{font:24px Georgia;color:#5a1f32}
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
 
-.offer{background:#5a1f32;color:white;text-align:center;padding:42px}
-.offer h2{font:38px Georgia;margin-bottom:8px}
-.offer p{font-size:13px;margin-bottom:20px}
-.offer .btn{background:#fff;color:#5a1f32}
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+        }
 
-.shopbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;border-bottom:1px solid #eee;padding-bottom:15px}
-.shopbar strong{font-size:14px}
-select{padding:10px;border:1px solid #ddd;background:#fff}
+        /* Hero Banner */
+        .hero {
+            display: flex;
+            background-color: #fdf2f4;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 80px;
+        }
 
-.store{display:grid;grid-template-columns:220px 1fr;gap:30px}
-.filters{border:1px solid #eee;padding:20px;height:max-content}
-.filters h3{font-size:14px;color:#5a1f32;margin-bottom:20px}
-.filter{border-top:1px solid #eee;padding:15px 0}
-.filter b{font-size:12px}
-.filter label{display:block;font-size:12px;margin-top:11px;color:#666}
+        .hero-text {
+            max-width: 500px;
+        }
 
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.product{position:relative}
-.photo{
-height:330px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(145deg,#f7e6ea,#eed1d9);
-color:#a45b6d;
-font-size:12px;
-position:relative;
-}
-.product:nth-child(2) .photo{background:linear-gradient(145deg,#eee6df,#dfcbc0)}
-.product:nth-child(3) .photo{background:linear-gradient(145deg,#e8dfe6,#d8c6d2)}
-.product:nth-child(4) .photo{background:linear-gradient(145deg,#f4eadc,#e8d1b9)}
-.product:nth-child(5) .photo{background:linear-gradient(145deg,#eee1e5,#ddc2cb)}
-.product:nth-child(6) .photo{background:linear-gradient(145deg,#eee9df,#ddd2bd)}
-.badge{position:absolute;top:12px;left:12px;background:#5a1f32;color:#fff;padding:6px 9px;font-size:9px}
-.wish{position:absolute;right:12px;top:12px;background:white;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;font-size:18px}
-.info{padding:12px 2px}
-.info h3{font-size:14px;font-weight:500;margin-bottom:8px}
-.stars{color:#c85c72;font-size:11px}
-.price{font-weight:bold;color:#5a1f32;margin-top:8px;display:inline-block}
-.mrp{text-decoration:line-through;color:#999;font-size:12px;margin-left:5px}
-.off{color:#c85c72;font-size:11px;margin-left:5px}
-.add{width:100%;margin-top:10px;padding:11px;border:1px solid #5a1f32;background:white;color:#5a1f32;font-weight:bold;cursor:pointer}
-.add:hover{background:#5a1f32;color:white}
+        .hero-text h2 {
+            font-size: 32px;
+            font-family: 'Georgia', serif;
+            margin-bottom: 10px;
+        }
 
-.editorial{margin:0 5%;padding:65px 8%;background:#f8e7ea}
-.editorial h2{font:40px Georgia;color:#5a1f32;margin:12px 0}
-.editorial p{max-width:500px;color:#6d6267;line-height:1.7;margin-bottom:22px}
+        .hero-text h1 {
+            font-size: 38px;
+            color: #222;
+            margin-bottom: 10px;
+        }
 
-.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.benefit{text-align:center;border:1px solid #eee;padding:28px 12px}
-.benefit h3{color:#5a1f32;font-size:14px;margin:10px}
-.benefit p{font-size:11px;color:#777}
+        .hero-text p {
+            color: #666;
+            margin-bottom: 25px;
+        }
 
-.news{background:#f8e7ea;text-align:center;padding:55px 20px}
-.news h2{font:34px Georgia;color:#5a1f32;margin-bottom:10px}
-.news p{font-size:13px;color:#666;margin-bottom:20px}
-.news input{height:44px;width:280px;border:1px solid #ddd;padding:0 12px}
-.news button{height:44px;background:#5a1f32;color:white;border:0;padding:0 20px;font-weight:bold}
+        .btn-shop {
+            background-color: #ff0055;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-footer{background:#292327;color:white;padding:50px 5% 20px}
-.footergrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
-footer h3{font-size:13px;margin-bottom:15px}
-footer a,footer p{display:block;color:#ccc;font-size:12px;margin-bottom:10px}
-.footerlogo{font:700 30px Georgia;margin-bottom:15px}
-.copy{text-align:center;border-top:1px solid #555;margin-top:35px;padding-top:20px;color:#aaa;font-size:10px}
+        .hero-image img {
+            max-width: 450px;
+            border-radius: 8px;
+        }
 
-@media(max-width:850px){
-header{flex-wrap:wrap;height:auto;padding:15px 4%;gap:12px}
-.search{width:100%;order:3}
-nav{justify-content:flex-start;padding:0 15px}
-.hero{height:430px;padding:40px 6%}
-.categories{grid-template-columns:repeat(2,1fr)}
-.store{grid-template-columns:1fr}
-.filters{display:none}
-.products{grid-template-columns:repeat(2,1fr)}
-.benefits{grid-template-columns:repeat(2,1fr)}
-.footergrid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:500px){
-.products{gap:12px}
-.photo{height:230px}
-.categories{gap:8px}
-.cat{height:150px}
-.cat h3{font-size:20px}
-.footergrid{grid-template-columns:1fr}
-.news input{width:65%}
-}
-</style>
+        /* Features Bar */
+        .features {
+            display: flex;
+            justify-content: flex-start;
+            gap: 40px;
+            padding: 20px 80px;
+            background-color: #fafafa;
+            font-size: 13px;
+            color: #555;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 80px;
+            text-align: center;
+        }
+
+        .category-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            padding: 10px;
+            object-fit: contain;
+        }
+
+        .category-item p {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Best Sellers Product Grid */
+        .products-section {
+            padding: 20px 80px 50px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+        }
+
+        .product-title {
+            font-size: 14px;
+            color: #333;
+            margin: 10px 0 5px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .rating {
+            color: #ffa41c;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="top">FREE SHIPPING ABOVE ₹999 &nbsp; | &nbsp; EASY RETURNS &nbsp; | &nbsp; COD AVAILABLE</div>
+    <!-- Header Navigation -->
+    <nav class="navbar">
+        <div class="logo">Clovia</div>
+        <ul class="nav-links">
+            <li><a href="#">Bras ▾</a></li>
+            <li><a href="#">Panties ▾</a></li>
+            <li><a href="#">Nightwear ▾</a></li>
+            <li><a href="#">Activewear ▾</a></li>
+            <li><a href="#">Loungewear ▾</a></li>
+            <li><a href="#">Swimwear ▾</a></li>
+            <li><a href="#">More ▾</a></li>
+        </ul>
+        <div class="nav-icons">🔍 👤 🛍️</div>
+    </nav>
 
-<header>
-  <div class="logo">BRAHUBB</div>
-  <input class="search" placeholder="Search bras, panties, lingerie...">
-  <div class="icons">♡ &nbsp;♙ &nbsp;🛍</div>
-</header>
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Clovia</h2>
+            <h1>Comfort • Confidence • You</h1>
+            <p>Stylish Lingerie & Loungewear for Every You</p>
+            <button class="btn-shop">Shop Now →</button>
+        </div>
+        <div class="hero-image">
+            <img src="YOUR_HERO_IMAGE.jpg" alt="Clovia Banner">
+        </div>
+    </section>
 
-<nav>
-<a href="#">NEW</a>
-<a href="#shop">BRAS</a>
-<a href="#shop">PANTIES</a>
-<a href="#shop">LINGERIE</a>
-<a href="#shop">NIGHTWEAR</a>
-<a href="#shop">ACTIVE</a>
-<a href="#shop">SHAPEWEAR</a>
-<a class="sale" href="#shop">SALE</a>
-</nav>
+    <!-- Features -->
+    <section class="features">
+        <div>🚚 <b>Free Shipping</b> On Orders Above ₹799</div>
+        <div>🔄 <b>Easy Returns</b> Within 7 Days</div>
+        <div>🛡️ <b>Trusted by</b> 2M+ Women</div>
+    </section>
 
-<section class="hero">
-<div>
-<small>BRAHUBB NEW COLLECTION</small>
-<h1>Feel Good.<br>Look Beautiful.</h1>
-<p>Comfort-first innerwear designed for everyday confidence, beautiful fits and effortless style.</p>
-<a class="btn" href="#shop">SHOP NOW</a>
-</div>
-</section>
+    <!-- Category Icons -->
+    <section class="categories">
+        <div class="category-item">
+            <img src="bra_icon.png" alt="Bras">
+            <p>Bras</p>
+        </div>
+        <div class="category-item">
+            <img src="panty_icon.png" alt="Panties">
+            <p>Panties</p>
+        </div>
+        <div class="category-item">
+            <img src="nightwear_icon.png" alt="Nightwear">
+            <p>Nightwear</p>
+        </div>
+        <div class="category-item">
+            <img src="activewear_icon.png" alt="Activewear">
+            <p>Activewear</p>
+        </div>
+        <div class="category-item">
+            <img src="loungewear_icon.png" alt="Loungewear">
+            <p>Loungewear</p>
+        </div>
+        <div class="category-item">
+            <img src="swimwear_icon.png" alt="Swimwear">
+            <p>Swimwear</p>
+        </div>
+        <div class="category-item">
+            <img src="shapewear_icon.png" alt="Shapewear">
+            <p>Shapewear</p>
+        </div>
+    </section>
 
-<section class="section">
-<div class="title">
-<span>EXPLORE</span>
-<h2>Shop By Category</h2>
-</div>
+    <!-- Best Sellers Section -->
+    <section class="products-section">
+        <div class="section-header">
+            <h2>Best Sellers</h2>
+            <a href="#" style="color: #ff0055; text-decoration: none;">View All →</a>
+        </div>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="bra1.jpg" alt="Bra">
+                <p class="product-title">Clovia Lace Padded Bra</p>
+                <p class="product-price">₹799</p>
+                <div class="rating">★★★★★ 4.3 (12k+)</div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="bra2.jpg" alt="Bra">
+                <p class="product-title">Clovia T-Shirt Bra</p>
+                <p class="product-price">₹699</p>
+                <div class="rating">★★★★★ 4.4 (8k+)</div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="bra3.jpg" alt="Bra">
+                <p class="product-title">Clovia Everyday Comfort Bra</p>
+                <p class="product-price">₹649</p>
+                <div class="rating">★★★★★ 4.2 (6k+)</div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="bra4.jpg" alt="Bra">
+                <p class="product-title">Clovia Printed Lace Bra</p>
+                <p class="product-price">₹899</p>
+                <div class="rating">★★★★★ 4.5 (5k+)</div>
+            </div>
+        </div>
+    </section>
 
-<div class="categories">
-<div class="cat"><h3>Bras</h3></div>
-<div class="cat"><h3>Panties</h3></div>
-<div class="cat"><h3>Lingerie</h3></div>
-<div class="cat"><h3>Nightwear</h3></div>
-<div class="cat"><h3>Active</h3></div>
-</div>
-</section>
-
-<section class="offer">
-<h2>FLAT 40% OFF</h2>
-<p>On selected Brahubb styles</p>
-<a class="btn" href="#shop">SHOP SALE</a>
-</section>
-
-<section class="section" id="shop">
-
-<div class="title">
-<span>BRAHUBB COLLECTION</span>
-<h2>All Products</h2>
-</div>
-
-<div class="shopbar">
-<strong>24 Products</strong>
-<select>
-<option>Sort: New Arrivals</option>
-<option>Price: Low to High</option>
-<option>Price: High to Low</option>
-<option>Best Sellers</option>
-<option>Discount</option>
-</select>
-</div>
-
-<div class="store">
-
-<aside class="filters">
-<h3>FILTERS</h3>
-
-<div class="filter">
-<b>CATEGORY</b>
-<label>☐ Bras</label>
-<label>☐ Panties</label>
-<label>☐ Lingerie Sets</label>
-<label>☐ Nightwear</label>
-<label>☐ Activewear</label>
-<label>☐ Shapewear</label>
-</div>
-
-<div class="filter">
-<b>SIZE</b>
-<label>☐ XS</label>
-<label>☐ S</label>
-<label>☐ M</label>
-<label>☐ L</label>
-<label>☐ XL</label>
-<label>☐ XXL</label>
-</div>
-
-<div class="filter">
-<b>PRICE</b>
-<label>☐ Under ₹499</label>
-<label>☐ ₹500–₹999</label>
-<label>☐ ₹1000–₹1499</label>
-<label>☐ ₹1500+</label>
-</div>
-</aside>
-
-<div class="products">
-
-<!-- PRODUCT 1 -->
-<div class="product">
-<div class="photo"><span class="badge">BESTSELLER</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Everyday Comfort Bra</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹499</span><span class="mrp">₹899</span><span class="off">44% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 2 -->
-<div class="product">
-<div class="photo"><span class="badge">NEW</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Soft Lace Padded Bra</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹699</span><span class="mrp">₹1,199</span><span class="off">42% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 3 -->
-<div class="product">
-<div class="photo"><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Seamless Everyday Bra</h3>
-<div class="stars">★★★★☆</div>
-<span class="price">₹599</span><span class="mrp">₹999</span><span class="off">40% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 4 -->
-<div class="product">
-<div class="photo"><span class="badge">TRENDING</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Premium Lace Set</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹999</span><span class="mrp">₹1,699</span><span class="off">41% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 5 -->
-<div class="product">
-<div class="photo"><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Cotton Full Coverage Bra</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹449</span><span class="mrp">₹799</span><span class="off">44% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 6 -->
-<div class="product">
-<div class="photo"><span class="badge">SALE</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb High Waist Comfort Panty</h3>
-<div class="stars">★★★★☆</div>
-<span class="price">₹299</span><span class="mrp">₹499</span><span class="off">40% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 7 -->
-<div class="product">
-<div class="photo"><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Everyday Bikini Panty</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹249</span><span class="mrp">₹399</span><span class="off">38% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 8 -->
-<div class="product">
-<div class="photo"><span class="badge">NEW</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Wireless Lounge Bra</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹549</span><span class="mrp">₹899</span><span class="off">39% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 9 -->
-<div class="product">
-<div class="photo"><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Light Support Sports Bra</h3>
-<div class="stars">★★★★☆</div>
-<span class="price">₹649</span><span class="mrp">₹999</span><span class="off">35% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 10 -->
-<div class="product">
-<div class="photo"><span class="badge">BESTSELLER</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Push-Up Everyday Bra</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹749</span><span class="mrp">₹1,299</span><span class="off">42% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 11 -->
-<div class="product">
-<div class="photo"><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Lace Triangle Bralette</h3>
-<div class="stars">★★★★★</div>
-<span class="price">₹599</span><span class="mrp">₹999</span><span class="off">40% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-<!-- PRODUCT 12 -->
-<div class="product">
-<div class="photo"><span class="badge">SALE</span><span class="wish">♡</span>PRODUCT IMAGE</div>
-<div class="info">
-<h3>Brahubb Seamless Mid Waist Panty</h3>
-<div class="stars">★★★★☆</div>
-<span class="price">₹279</span><span class="mrp">₹449</span><span class="off">38% OFF</span>
-<button class="add">ADD TO BAG</button>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<section class="editorial">
-<div>
-<small style="color:#c85c72;letter-spacing:2px;font-weight:bold">THE BRAHUBB EDIT</small>
-<h2>Comfort is always in style.</h2>
-<p>Thoughtfully designed innerwear made for your everyday moments — from workdays to weekends.</p>
-<a class="btn" href="#shop">DISCOVER COLLECTION</a>
-</div>
-</section>
-
-<section class="section">
-<div class="title">
-<span>WHY BRAHUBB</span>
-<h2>Made For You</h2>
-</div>
-
-<div class="benefits">
-<div class="benefit"><div>♡</div><h3>Comfort First</h3><p>Soft, everyday-friendly designs.</p></div>
-<div class="benefit"><div>✦</div><h3>Beautiful Fits</h3><p>Designed around real everyday comfort.</p></div>
-<div class="benefit"><div>✓</div><h3>Quality</h3><p>Thoughtful materials and finishing.</p></div>
-<div class="benefit"><div>↺</div><h3>Easy Returns</h3><p>Simple shopping experience.</p></div>
-</div>
-</section>
-
-<section class="news">
-<h2>Stay in the loop.</h2>
-<p>Get new launches, offers and Brahubb updates.</p>
-<input type="email" placeholder="Enter your email">
-<button>SUBSCRIBE</button>
-</section>
-
-<footer>
-<div class="footergrid">
-<div>
-<div class="footerlogo">BRAHUBB</div>
-<p>Your everyday destination for comfortable and beautiful innerwear.</p>
-</div>
-<div>
-<h3>SHOP</h3>
-<a href="#">Bras</a>
-<a href="#">Panties</a>
-<a href="#">Lingerie</a>
-<a href="#">Nightwear</a>
-</div>
-<div>
-<h3>HELP</h3>
-<a href="#">Contact Us</a>
-<a href="#">Shipping</a>
-<a href="#">Returns</a>
-<a
+</body>
+</html>
