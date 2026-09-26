@@ -1,2 +1,977 @@
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BRAHUBB | Innerwear & Lingerie</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#292327;
+  background:#fff;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* TOP STRIP */
+.top-strip{
+  background:#5a1f32;
+  color:#fff;
+  text-align:center;
+  padding:9px 15px;
+  font-size:11px;
+  letter-spacing:1.2px;
+}
+
+/* HEADER */
+.header{
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  background:#fff;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.logo{
+  font-family:Georgia,serif;
+  font-size:31px;
+  font-weight:bold;
+  letter-spacing:-1px;
+  color:#5a1f32;
+}
+
+.search{
+  width:38%;
+  height:40px;
+  border:1px solid #ddd;
+  border-radius:3px;
+  padding:0 16px;
+  outline:none;
+  font-size:13px;
+  background:#fafafa;
+}
+
+.header-icons{
+  display:flex;
+  gap:20px;
+  font-size:20px;
+}
+
+.icon{
+  cursor:pointer;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:32px;
+  height:48px;
+  border-bottom:1px solid #eee;
+  background:#fff;
+  overflow:auto;
+  white-space:nowrap;
+}
+
+.nav a{
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:.7px;
+}
+
+.nav a:hover{
+  color:#c85c72;
+}
+
+.sale{
+  color:#c85c72;
+}
+
+/* HERO */
+.hero{
+  min-height:520px;
+  background:
+    linear-gradient(90deg,rgba(248,231,234,.96),rgba(255,249,246,.55)),
+    radial-gradient(circle at 80% 40%,#e9b8c4,transparent 35%);
+  display:flex;
+  align-items:center;
+  padding:60px 7%;
+}
+
+.hero-content{
+  max-width:620px;
+}
+
+.small-title{
+  font-size:12px;
+  letter-spacing:3px;
+  font-weight:bold;
+  color:#c85c72;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(45px,7vw,78px);
+  line-height:.98;
+  color:#5a1f32;
+  margin-bottom:22px;
+}
+
+.hero p{
+  color:#625960;
+  font-size:16px;
+  line-height:1.7;
+  max-width:480px;
+  margin-bottom:30px;
+}
+
+.btn{
+  display:inline-block;
+  background:#5a1f32;
+  color:#fff;
+  padding:14px 30px;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1.2px;
+  border-radius:2px;
+}
+
+.btn:hover{
+  background:#c85c72;
+}
+
+/* SECTION */
+.section{
+  padding:65px 5%;
+}
+
+.heading{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.heading span{
+  display:block;
+  color:#c85c72;
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.heading h2{
+  font-family:Georgia,serif;
+  color:#5a1f32;
+  font-size:36px;
+}
+
+/* CATEGORIES */
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.category{
+  height:260px;
+  background:linear-gradient(145deg,#f8e7ea,#f3d6dc);
+  display:flex;
+  align-items:flex-end;
+  padding:25px;
+  position:relative;
+  overflow:hidden;
+}
+
+.category:nth-child(2){
+  background:linear-gradient(145deg,#f6eee9,#ead7cf);
+}
+
+.category:nth-child(3){
+  background:linear-gradient(145deg,#eee2e7,#dec4cf);
+}
+
+.category:nth-child(4){
+  background:linear-gradient(145deg,#f5e8d8,#ead0b8);
+}
+
+.category:before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.35);
+  right:-45px;
+  top:-40px;
+}
+
+.category-content{
+  position:relative;
+  z-index:2;
+}
+
+.category h3{
+  color:#5a1f32;
+  font-family:Georgia,serif;
+  font-size:26px;
+  margin-bottom:7px;
+}
+
+.category p{
+  color:#665a60;
+  font-size:12px;
+}
+
+/* OFFER */
+.offer{
+  background:#5a1f32;
+  color:#fff;
+  text-align:center;
+  padding:45px 20px;
+}
+
+.offer h2{
+  font-family:Georgia,serif;
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.offer p{
+  font-size:13px;
+  letter-spacing:.5px;
+  margin-bottom:22px;
+  opacity:.9;
+}
+
+.offer .btn{
+  background:#fff;
+  color:#5a1f32;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.product{
+  background:#fff;
+  position:relative;
+}
+
+.product-image{
+  height:320px;
+  background:linear-gradient(145deg,#f8e7ea,#f0d5dc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#a65b6e;
+  font-size:12px;
+  position:relative;
+  overflow:hidden;
+}
+
+.product:nth-child(2) .product-image{
+  background:linear-gradient(145deg,#eee5df,#dfcbc1);
+}
+
+.product:nth-child(3) .product-image{
+  background:linear-gradient(145deg,#e9dfe6,#d8c4d0);
+}
+
+.product:nth-child(4) .product-image{
+  background:linear-gradient(145deg,#f5eadc,#e9d0b7);
+}
+
+.badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#5a1f32;
+  color:#fff;
+  padding:6px 9px;
+  font-size:9px;
+  letter-spacing:.7px;
+}
+
+.heart{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
+
+.product-info{
+  padding:15px 4px;
+}
+
+.product-info h3{
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:8px;
+}
+
+.stars{
+  color:#c85c72;
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.price{
+  color:#5a1f32;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.old{
+  color:#999;
+  text-decoration:line-through;
+  font-size:12px;
+  font-weight:normal;
+  margin-left:5px;
+}
+
+.discount{
+  color:#c85c72;
+  font-size:11px;
+  margin-left:5px;
+}
+
+/* EDITORIAL */
+.editorial{
+  margin:0 5%;
+  min-height:350px;
+  background:linear-gradient(100deg,#f6e5e8,#f9f0eb);
+  display:flex;
+  align-items:center;
+  padding:50px 7%;
+}
+
+.editorial-content{
+  max-width:500px;
+}
+
+.editorial h2{
+  font-family:Georgia,serif;
+  color:#5a1f32;
+  font-size:43px;
+  margin-bottom:15px;
+}
+
+.editorial p{
+  color:#6e6268;
+  line-height:1.7;
+  margin-bottom:22px;
+}
+
+/* BENEFITS */
+.benefits{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.benefit{
+  text-align:center;
+  padding:30px 15px;
+  border:1px solid #eee;
+}
+
+.benefit-icon{
+  font-size:27px;
+  margin-bottom:12px;
+}
+
+.benefit h3{
+  color:#5a1f32;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.benefit p{
+  color:#777;
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* NEWSLETTER */
+.newsletter{
+  background:#f8e7ea;
+  text-align:center;
+  padding:60px 20px;
+}
+
+.newsletter h2{
+  font-family:Georgia,serif;
+  color:#5a1f32;
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.newsletter p{
+  color:#6d6267;
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+.email-box{
+  display:flex;
+  max-width:480px;
+  margin:auto;
+}
+
+.email-box input{
+  flex:1;
+  border:1px solid #ddd;
+  padding:14px;
+  outline:none;
+}
+
+.email-box button{
+  border:0;
+  background:#5a1f32;
+  color:#fff;
+  padding:0 24px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* FOOTER */
+.footer{
+  background:#292327;
+  color:#fff;
+  padding:55px 5% 25px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;
+  margin-bottom:40px;
+}
+
+.footer-logo{
+  font-family:Georgia,serif;
+  font-size:30px;
+  color:#fff;
+  margin-bottom:15px;
+}
+
+.footer p{
+  color:#cfc7ca;
+  font-size:12px;
+  line-height:1.7;
+  max-width:330px;
+}
+
+.footer h3{
+  font-size:13px;
+  margin-bottom:17px;
+}
+
+.footer a{
+  display:block;
+  color:#cfc7ca;
+  font-size:12px;
+  margin-bottom:11px;
+}
+
+.footer a:hover{
+  color:#fff;
+}
+
+.copyright{
+  border-top:1px solid #514b4e;
+  padding-top:20px;
+  text-align:center;
+  color:#aaa;
+  font-size:10px;
+}
+
+/* MOBILE */
+@media(max-width:800px){
+
+  .header{
+    height:auto;
+    padding:15px 4%;
+    flex-wrap:wrap;
+    gap:13px;
+  }
+
+  .logo{
+    font-size:27px;
+  }
+
+  .search{
+    order:3;
+    width:100%;
+  }
+
+  .header-icons{
+    gap:13px;
+  }
+
+  .nav{
+    justify-content:flex-start;
+    padding:0 15px;
+    gap:22px;
+  }
+
+  .hero{
+    min-height:460px;
+    padding:50px 7%;
+  }
+
+  .categories,
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .benefits{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .product-image{
+    height:240px;
+  }
+
+  .category{
+    height:200px;
+    padding:18px;
+  }
+
+  .category h3{
+    font-size:20px;
+  }
+
+  .editorial{
+    margin:0;
+    min-height:330px;
+    padding:40px 7%;
+  }
+
+  .editorial h2{
+    font-size:35px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .section{
+    padding:48px 4%;
+  }
+
+  .heading h2{
+    font-size:30px;
+  }
+
+  .categories,
+  .products{
+    gap:10px;
+  }
+
+  .product-image{
+    height:200px;
+  }
+
+  .product-info h3{
+    font-size:12px;
+  }
+
+  .offer h2{
+    font-size:30px;
+  }
+
+  .email-box{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .email-box input{
+    height:45px;
+  }
+
+  .email-box button{
+    height:45px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="top-strip">
+  FREE SHIPPING ON ORDERS ABOVE ₹999 &nbsp; | &nbsp; EASY RETURNS
+</div>
+
+<!-- HEADER -->
+<header class="header">
+
+  <div class="logo">BRAHUBB</div>
+
+  <input
+    class="search"
+    type="search"
+    placeholder="Search bras, panties, lingerie..."
+  >
+
+  <div class="header-icons">
+    <span class="icon">♡</span>
+    <span class="icon">♙</span>
+    <span class="icon">🛍</span>
+  </div>
+
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#">NEW</a>
+  <a href="#">BRAS</a>
+  <a href="#">PANTIES</a>
+  <a href="#">LINGERIE</a>
+  <a href="#">NIGHTWEAR</a>
+  <a href="#">ACTIVEWEAR</a>
+  <a href="#">SETS</a>
+  <a class="sale" href="#">SALE</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="small-title">
+      BRAHUBB NEW COLLECTION
+    </div>
+
+    <h1>
+      Feel Good.<br>
+      Look Beautiful.
+    </h1>
+
+    <p>
+      Everyday comfort meets beautiful design.
+      Discover lingerie made to make you feel confident,
+      comfortable and completely yourself.
+    </p>
+
+    <a class="btn" href="#products">
+      SHOP NOW
+    </a>
+
+  </div>
+
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+
+  <div class="heading">
+    <span>EXPLORE</span>
+    <h2>Shop By Category</h2>
+  </div>
+
+  <div class="categories">
+
+    <div class="category">
+      <div class="category-content">
+        <h3>Bras</h3>
+        <p>Everyday comfort & support</p>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-content">
+        <h3>Panties</h3>
+        <p>Soft styles for every day</p>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-content">
+        <h3>Lingerie</h3>
+        <p>Beautiful. Confident. You.</p>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-content">
+        <h3>Nightwear</h3>
+        <p>Relax in comfort</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- OFFER -->
+<section class="offer">
+
+  <h2>FLAT 40% OFF</h2>
+
+  <p>
+    On selected styles • Limited time offer
+  </p>
+
+  <a class="btn" href="#products">
+    SHOP SALE
+  </a>
+
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+
+  <div class="heading">
+    <span>SHOP YOUR FAVOURITES</span>
+    <h2>Trending Now</h2>
+  </div>
+
+  <div class="products">
+
+    <div class="product">
+
+      <div class="product-image">
+        <span class="badge">BESTSELLER</span>
+        <span class="heart">♡</span>
+        PRODUCT IMAGE
+      </div>
+
+      <div class="product-info">
+        <h3>Everyday Comfort Bra</h3>
+        <div class="stars">★★★★★</div>
+        <span class="price">₹899</span>
+        <span class="old">₹1,499</span>
+        <span class="discount">40% OFF</span>
+      </div>
+
+    </div>
+
+    <div class="product">
+
+      <div class="product-image">
+        <span class="badge">NEW</span>
+        <span class="heart">♡</span>
+        PRODUCT IMAGE
+      </div>
+
+      <div class="product-info">
+        <h3>Soft Lace Comfort Bra</h3>
+        <div class="stars">★★★★★</div>
+        <span class="price">₹999</span>
+        <span class="old">₹1,699</span>
+        <span class="discount">41% OFF</span>
+      </div>
+
+    </div>
+
+    <div class="product">
+
+      <div class="product-image">
+        <span class="heart">♡</span>
+        PRODUCT IMAGE
+      </div>
+
+      <div class="product-info">
+        <h3>Seamless Everyday Panty</h3>
+        <div class="stars">★★★★☆</div>
+        <span class="price">₹399</span>
+        <span class="old">₹699</span>
+        <span class="discount">43% OFF</span>
+      </div>
+
+    </div>
+
+    <div class="product">
+
+      <div class="product-image">
+        <span class="badge">TRENDING</span>
+        <span class="heart">♡</span>
+        PRODUCT IMAGE
+      </div>
+
+      <div class="product-info">
+        <h3>Premium Lingerie Set</h3>
+        <div class="stars">★★★★★</div>
+        <span class="price">₹1,299</span>
+        <span class="old">₹2,199</span>
+        <span class="discount">41% OFF</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- EDITORIAL -->
+<section class="editorial">
+
+  <div class="editorial-content">
+
+    <div class="small-title">
+      THE BRAHUBB EDIT
+    </div>
+
+    <h2>
+      Comfort is always in style.
+    </h2>
+
+    <p>
+      Designed for your everyday moments, Brahubb brings
+      together soft fabrics, thoughtful fits and beautiful
+      silhouettes.
+    </p>
+
+    <a class="btn" href="#">
+      DISCOVER BRAHUBB
+    </a>
+
+  </div>
+
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+
+  <div class="heading">
+    <span>WHY BRAHUBB</span>
+    <h2>Made For You</h2>
+  </div>
+
+  <div class="benefits">
+
+    <div class="benefit">
+      <div class="benefit-icon">♡</div>
+      <h3>Comfort First</h3>
+      <p>Soft and comfortable styles made for everyday wear.</p>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-icon">✦</div>
+      <h3>Beautiful Fits</h3>
+      <p>Thoughtful designs created to feel as good as they look.</p>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-icon">✓</div>
+      <h3>Quality</h3>
+      <p>Carefully selected materials and attention to detail.</p>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-icon">↺</div>
+      <h3>Easy Returns</h3>
+      <p>Simple and convenient return experience.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+
+  <h2>Stay in the loop.</h2>
+
+  <p>
+    Get first access to new launches, offers and Brahubb updates.
+  </p>
+
+  <div class="email-box">
+    <input
+      type="email"
+      placeholder="Enter your email address"
+    >
+    <button type="button">
+      SUBSCRIBE
+    </button>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-grid">
+
+    <div>
+      <div class="footer-logo">BRAHUBB</div>
+
+      <p>
+        Beautiful everyday essentials designed around
+        comfort, confidence and you.
+      </p>
+    </div>
+
+    <div>
+      <h3>SHOP</h3>
+      <a href="#">Bras</a>
+      <a href="#">Panties</a>
+      <a href="#">Lingerie</a>
+      <a href="#">Nightwear</a>
+    </div>
+
+    <div>
+      <h3>HELP</h3>
+      <a href="#">Contact Us</a>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#">FAQs</a>
+    </div>
+
+    <div>
+      <h3>ABOUT</h3>
+      <a href="#">Our Story</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Instagram</a>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 BRAHUBB. All Rights Reserved.
+  </div>
+
+</footer>
+
+</body>
+</html>
