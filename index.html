@@ -21,8 +21,8 @@ header{position:sticky;top:0;z-index:50;background:#111;color:#fff;box-shadow:0 
 .filters button.active{background:#111;color:#fff}
 .count{color:#666;margin-bottom:12px}
 .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
-.card{background:#fff;border:1px solid #e8e8e8;border-radius:11px;overflow:hidden;transition:.15s}
-.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0001}
+.card{background:#fff;cursor:pointer;user-select:none;border:1px solid #e8e8e8;border-radius:11px;overflow:hidden;transition:.15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0001}.card:active{transform:scale(.99)}.card:focus{outline:2px solid #111;outline-offset:2px}
 .pic{width:100%;aspect-ratio:1/1.05;object-fit:cover;display:block;background:#eee;cursor:pointer}
 .info{padding:11px}.cat{font-size:11px;color:#777;font-weight:800;text-transform:uppercase}
 .name{font-weight:750;margin-top:5px;min-height:38px;cursor:pointer}
@@ -76,12 +76,12 @@ function render(){
  let a=products.filter(p=>(active==='All'||p.category===active)&&(!s||(p.name+' '+p.category).toLowerCase().includes(s)));
  if(sort.value==='low')a.sort((x,y)=>x.price-y.price);if(sort.value==='high')a.sort((x,y)=>y.price-x.price);if(sort.value==='rating')a.sort((x,y)=>y.rating-x.rating);
  document.getElementById('count').textContent=a.length+' products';
- grid.innerHTML=a.map(p=>`<article class="card">
+ grid.innerHTML=a.map(p=>`<article class="card" onclick="showProduct(${p.id})">
  <img class="pic" loading="lazy" src="${p.image}" alt="${p.name}" onclick="showProduct(${p.id})">
  <div class="info"><div class="cat">${p.category}</div><div class="name" onclick="showProduct(${p.id})">${p.name}</div>
  <div class="price">₹${p.price.toLocaleString('en-IN')} <span class="mrp">₹${p.mrp.toLocaleString('en-IN')}</span><span class="off">${p.discount}% off</span></div>
  <div class="rating">★ ${p.rating} · ${p.reviews.toLocaleString('en-IN')} reviews</div>
- <button class="add" onclick="addToCart(${p.id})">Add to Cart</button></div></article>`).join('')||'<p>No products found.</p>';
+ <button class="add" onclick="event.stopPropagation();addToCart(${p.id})">Add to Cart</button></div></article>`).join('')||'<p>No products found.</p>';
  updateCartCount();
 }
 function showProduct(id){
