@@ -1,171 +1,228 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brahubb - Online Store</title>
+
+<title>Brahubb | Online Shopping</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  margin: 0;
-  font-family: Georgia, serif;
-  background: #f5f5f5;
-  color: #111;
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f5f5;
+  color:#222;
 }
 
-header {
-  background: #111;
-  color: white;
-  padding: 18px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+header{
+  background:#111;
+  color:white;
+  padding:15px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.logo {
-  font-size: 32px;
-  font-weight: bold;
+.logo{
+  font-size:30px;
+  font-weight:bold;
+  letter-spacing:1px;
 }
 
-.cart {
-  background: white;
-  color: #111;
-  padding: 14px 22px;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
+.search{
+  flex:1;
+  max-width:500px;
 }
 
-.hero {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 90px 20px;
+.search input{
+  width:100%;
+  padding:13px 18px;
+  border:none;
+  border-radius:25px;
+  outline:none;
+  font-size:15px;
 }
 
-.hero h1 {
-  font-size: 52px;
-  margin: 0 0 20px;
+.cart-btn{
+  background:white;
+  color:#111;
+  border:none;
+  padding:12px 18px;
+  border-radius:25px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.hero p {
-  font-size: 22px;
+.hero{
+  background:linear-gradient(135deg,#111,#444);
+  color:white;
+  text-align:center;
+  padding:55px 20px;
 }
 
-.shop-btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 16px 32px;
-  background: white;
-  color: #111;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
+.hero h1{
+  font-size:44px;
+  margin-bottom:12px;
 }
 
-.products {
-  padding: 50px 6%;
+.hero p{
+  font-size:18px;
 }
 
-.products h2 {
-  text-align: center;
-  font-size: 40px;
+.categories{
+  padding:25px 5%;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  background:white;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+.category{
+  border:1px solid #ddd;
+  background:white;
+  padding:10px 18px;
+  border-radius:25px;
+  white-space:nowrap;
+  cursor:pointer;
 }
 
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px #ddd;
-  text-align: center;
+.category.active,
+.category:hover{
+  background:#111;
+  color:white;
 }
 
-.product-img {
-  height: 220px;
-  background: #eee;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 70px;
+.products{
+  padding:35px 5%;
 }
 
-.card h3 {
-  font-size: 25px;
+.products h2{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:30px;
 }
 
-.price {
-  font-size: 21px;
-  font-weight: bold;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:20px;
 }
 
-.buy {
-  border: 0;
-  background: #111;
-  color: white;
-  padding: 13px 22px;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-top: 10px;
+.card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  padding-bottom:18px;
 }
 
-#cartBox {
-  display: none;
-  background: white;
-  padding: 30px;
-  margin: 20px 6%;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px #ddd;
+.pic{
+  height:190px;
+  background:#eee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:70px;
 }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #ddd;
+.info{
+  padding:16px;
 }
 
-.whatsapp {
-  display: block;
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px;
-  background: #25D366;
-  color: white;
-  text-align: center;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
+.category-name{
+  color:#777;
+  font-size:13px;
 }
 
-footer {
-  background: #111;
-  color: white;
-  text-align: center;
-  padding: 30px;
-  margin-top: 40px;
+.card h3{
+  margin:7px 0;
 }
 
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 40px;
+.price{
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+.buy{
+  width:100%;
+  padding:11px;
+  border:none;
+  border-radius:22px;
+  background:#111;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.cart-box{
+  display:none;
+  background:white;
+  margin:25px 5%;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 3px 15px #ddd;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.total{
+  font-size:22px;
+  font-weight:bold;
+  margin-top:20px;
+}
+
+.whatsapp{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:none;
+  border-radius:25px;
+  background:#25D366;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+footer{
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:30px;
+  margin-top:30px;
+}
+
+@media(max-width:650px){
+  header{
+    flex-wrap:wrap;
   }
 
-  .products h2 {
-    font-size: 32px;
+  .logo{
+    font-size:25px;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+  }
+
+  .hero h1{
+    font-size:35px;
   }
 }
 </style>
@@ -174,148 +231,432 @@ footer {
 <body>
 
 <header>
-  <div class="logo">Brahubb</div>
-  <div class="cart" onclick="showCart()">
-    🛒 Cart: <span id="cartCount">0</span>
+
+  <div class="logo">BRAHUBB</div>
+
+  <div class="search">
+    <input
+      type="text"
+      id="search"
+      placeholder="Search products..."
+      onkeyup="searchProducts()"
+    >
   </div>
+
+  <button class="cart-btn" onclick="showCart()">
+    🛒 Cart (<span id="count">0</span>)
+  </button>
+
 </header>
 
 <section class="hero">
   <h1>Welcome to Brahubb</h1>
-  <p>Discover products you'll love.</p>
-  <a href="#products" class="shop-btn">Shop Now</a>
+  <p>Everything you need, all in one place.</p>
 </section>
 
-<section class="products" id="products">
-  <h2>Our Products</h2>
+<div class="categories">
 
-  <div class="grid">
+  <button class="category active" onclick="filterProducts('All',this)">
+    All
+  </button>
 
-    <div class="card">
-      <div class="product-img">📱</div>
-      <h3>Smartphone</h3>
-      <p>Modern smartphone for everyday use.</p>
-      <div class="price">₹19,999</div>
-      <button class="buy" onclick="addToCart('Smartphone',19999)">
-        Add to Cart
-      </button>
-    </div>
+  <button class="category" onclick="filterProducts('Electronics',this)">
+    📱 Electronics
+  </button>
 
-    <div class="card">
-      <div class="product-img">🎧</div>
-      <h3>Headphones</h3>
-      <p>Enjoy clear and powerful sound.</p>
-      <div class="price">₹1,999</div>
-      <button class="buy" onclick="addToCart('Headphones',1999)">
-        Add to Cart
-      </button>
-    </div>
+  <button class="category" onclick="filterProducts('Fashion',this)">
+    👕 Fashion
+  </button>
 
-    <div class="card">
-      <div class="product-img">⌚</div>
-      <h3>Smart Watch</h3>
-      <p>Track your day in style.</p>
-      <div class="price">₹2,499</div>
-      <button class="buy" onclick="addToCart('Smart Watch',2499)">
-        Add to Cart
-      </button>
-    </div>
+  <button class="category" onclick="filterProducts('Shoes',this)">
+    👟 Shoes
+  </button>
 
-    <div class="card">
-      <div class="product-img">🎒</div>
-      <h3>Premium Backpack</h3>
-      <p>Stylish and comfortable backpack.</p>
-      <div class="price">₹999</div>
-      <button class="buy" onclick="addToCart('Premium Backpack',999)">
-        Add to Cart
-      </button>
-    </div>
+  <button class="category" onclick="filterProducts('Beauty',this)">
+    💄 Beauty
+  </button>
 
-  </div>
+  <button class="category" onclick="filterProducts('Home',this)">
+    🏠 Home
+  </button>
+
+  <button class="category" onclick="filterProducts('Bags',this)">
+    🎒 Bags
+  </button>
+
+</div>
+
+<section class="products">
+
+<h2>Featured Products</h2>
+
+<div class="grid" id="products"></div>
+
 </section>
 
-<div id="cartBox">
+<div class="cart-box" id="cartBox">
+
   <h2>🛒 Your Cart</h2>
 
   <div id="cartItems"></div>
 
-  <h3>Total: ₹<span id="total">0</span></h3>
+  <div class="total">
+    Total: ₹<span id="total">0</span>
+  </div>
 
   <button class="whatsapp" onclick="orderWhatsApp()">
     📱 Order on WhatsApp
   </button>
+
 </div>
 
 <footer>
-  © 2026 Brahubb. All rights reserved.
+
+  <h2>BRAHUBB</h2>
+  <p>Shop smart. Shop Brahubb.</p>
+  <br>
+  <p>© 2026 Brahubb. All rights reserved.</p>
+
 </footer>
 
 <script>
 
-let cart = [];
+const products = [
 
-function addToCart(name, price) {
-  cart.push({
-    name: name,
-    price: price
-  });
+{
+name:"Smartphone",
+category:"Electronics",
+price:19999,
+icon:"📱"
+},
 
-  document.getElementById("cartCount").innerText = cart.length;
+{
+name:"Wireless Earbuds",
+category:"Electronics",
+price:1499,
+icon:"🎧"
+},
 
-  alert(name + " added to cart!");
+{
+name:"Smart Watch",
+category:"Electronics",
+price:2499,
+icon:"⌚"
+},
+
+{
+name:"Bluetooth Speaker",
+category:"Electronics",
+price:1799,
+icon:"🔊"
+},
+
+{
+name:"Men's T-Shirt",
+category:"Fashion",
+price:599,
+icon:"👕"
+},
+
+{
+name:"Women's Dress",
+category:"Fashion",
+price:999,
+icon:"👗"
+},
+
+{
+name:"Denim Jacket",
+category:"Fashion",
+price:1499,
+icon:"🧥"
+},
+
+{
+name:"Running Shoes",
+category:"Shoes",
+price:1799,
+icon:"👟"
+},
+
+{
+name:"Casual Sneakers",
+category:"Shoes",
+price:1299,
+icon:"👞"
+},
+
+{
+name:"Beauty Kit",
+category:"Beauty",
+price:799,
+icon:"💄"
+},
+
+{
+name:"Perfume",
+category:"Beauty",
+price:699,
+icon:"🌸"
+},
+
+{
+name:"Face Care Kit",
+category:"Beauty",
+price:899,
+icon:"🧴"
+},
+
+{
+name:"Kitchen Set",
+category:"Home",
+price:1299,
+icon:"🍳"
+},
+
+{
+name:"LED Lamp",
+category:"Home",
+price:599,
+icon:"💡"
+},
+
+{
+name:"Bedsheet",
+category:"Home",
+price:799,
+icon:"🛏️"
+},
+
+{
+name:"Travel Backpack",
+category:"Bags",
+price:999,
+icon:"🎒"
+},
+
+{
+name:"Handbag",
+category:"Bags",
+price:899,
+icon:"👜"
+},
+
+{
+name:"Wallet",
+category:"Bags",
+price:399,
+icon:"👛"
 }
 
-function showCart() {
+];
 
-  let box = document.getElementById("cartBox");
-  let items = document.getElementById("cartItems");
-  let total = 0;
+let cart=[];
 
-  box.style.display = "block";
-  items.innerHTML = "";
+let currentCategory="All";
 
-  if (cart.length === 0) {
-    items.innerHTML = "<p>Your cart is empty.</p>";
-  }
+function displayProducts(list){
 
-  cart.forEach(function(item, index) {
+const box=document.getElementById("products");
 
-    total += item.price;
+box.innerHTML="";
 
-    items.innerHTML += `
-      <div class="cart-item">
-        <span>${item.name}</span>
-        <span>₹${item.price}</span>
-      </div>
-    `;
-  });
+if(list.length===0){
 
-  document.getElementById("total").innerText = total;
+box.innerHTML="<p>No products found.</p>";
+
+return;
+
 }
 
-function orderWhatsApp() {
+list.forEach((p,index)=>{
 
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
+box.innerHTML+=`
 
-  let message = "Hello Brahubb!%0A%0AI want to order:%0A";
-  let total = 0;
+<div class="card">
 
-  cart.forEach(function(item) {
-    message += "- " + item.name + " - ₹" + item.price + "%0A";
-    total += item.price;
-  });
+<div class="pic">
+${p.icon}
+</div>
 
-  message += "%0ATotal: ₹" + total;
-  message += "%0A%0APlease confirm my order.";
+<div class="info">
 
-  window.open(
-    "https://wa.me/918541979145?text=" + message,
-    "_blank"
-  );
+<div class="category-name">
+${p.category}
+</div>
+
+<h3>${p.name}</h3>
+
+<div class="price">
+₹${p.price.toLocaleString("en-IN")}
+</div>
+
+<button class="buy"
+onclick="addCart(${index})">
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
 }
+
+function addCart(index){
+
+const visible=getVisibleProducts();
+
+cart.push(visible[index]);
+
+document.getElementById("count").innerText=cart.length;
+
+alert(visible[index].name+" added to cart!");
+
+}
+
+function getVisibleProducts(){
+
+let list=products;
+
+if(currentCategory!=="All"){
+
+list=list.filter(
+p=>p.category===currentCategory
+);
+
+}
+
+const search=document
+.getElementById("search")
+.value
+.toLowerCase();
+
+if(search){
+
+list=list.filter(
+p=>p.name.toLowerCase().includes(search)
+);
+
+}
+
+return list;
+
+}
+
+function filterProducts(category,button){
+
+currentCategory=category;
+
+document
+.querySelectorAll(".category")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+displayProducts(getVisibleProducts());
+
+}
+
+function searchProducts(){
+
+displayProducts(getVisibleProducts());
+
+}
+
+function showCart(){
+
+const box=document.getElementById("cartBox");
+
+box.style.display="block";
+
+const items=document.getElementById("cartItems");
+
+items.innerHTML="";
+
+let total=0;
+
+if(cart.length===0){
+
+items.innerHTML="<p>Your cart is empty.</p>";
+
+document.getElementById("total").innerText="0";
+
+return;
+
+}
+
+cart.forEach((item,index)=>{
+
+total+=item.price;
+
+items.innerHTML+=`
+
+<div class="cart-item">
+
+<span>
+${item.name}
+</span>
+
+<span>
+₹${item.price.toLocaleString("en-IN")}
+</span>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("total").innerText=
+total.toLocaleString("en-IN");
+
+}
+
+function orderWhatsApp(){
+
+if(cart.length===0){
+
+alert("Your cart is empty!");
+
+return;
+
+}
+
+let message=
+"Hello Brahubb!%0A%0AI want to order:%0A";
+
+let total=0;
+
+cart.forEach(item=>{
+
+message+=
+"- "+
+item.name+
+" - ₹"+
+item.price+
+"%0A";
+
+total+=item.price;
+
+});
+
+message+=
+"%0ATotal: ₹"+
+total+
+"%0A%0APlease confirm my order.";
+
+window.open(
+"https://wa.me/918541979145?text="+message,
+"_blank"
+);
+
+}
+
+displayProducts(products);
 
 </script>
 
