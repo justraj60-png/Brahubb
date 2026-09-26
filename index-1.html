@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BRAHUBB</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #ddd;padding:12px}
+.top{max-width:1200px;margin:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font-size:24px;font-weight:800}.search{flex:1;min-width:180px;padding:12px;border:1px solid #bbb;border-radius:7px}
+button{cursor:pointer}.cartBtn{background:#111;color:#fff;border:0;border-radius:7px;padding:12px 16px;font-weight:700}
+.categories{max-width:1200px;margin:8px auto 0;display:flex;gap:8px;overflow:auto;padding:4px 0}
+.categories button{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:20px;white-space:nowrap}
+main{max-width:1200px;margin:18px auto;padding:0 12px}.hero{background:#fff;border-radius:10px;padding:22px;margin-bottom:16px}
+.hero h1{margin:0 0 6px}.hero p{margin:0;color:#666}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{background:#fff;border:1px solid #ddd;border-radius:9px;overflow:hidden}.pic{width:100%;height:220px;object-fit:cover;background:#eee}
+.info{padding:11px}.cat{font-size:12px;color:#777}.name{font-weight:700;margin:5px 0}.rating{font-size:13px;color:#555}
+.price{font-size:18px;font-weight:800;margin-top:8px}.mrp{text-decoration:line-through;color:#999;font-size:13px;font-weight:400;margin-left:5px}
+.add{width:100%;padding:11px;margin-top:10px;border:0;border-radius:6px;background:#111;color:#fff;font-weight:700}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:50;padding:15px}
+.box{background:#fff;border-radius:12px;padding:18px;width:100%;max-width:600px;max-height:90vh;overflow:auto}.close{float:right;border:0;border-radius:50%;width:34px;height:34px}
+.detailImg{width:100%;max-height:380px;object-fit:cover;border-radius:8px}.line{padding:12px 0;border-bottom:1px solid #ddd}
+.qty button{width:32px;height:32px}.primary{width:100%;padding:12px;background:#111;color:#fff;border:0;border-radius:7px;font-weight:700;margin-top:12px}
+.field{width:100%;padding:11px;margin:6px 0;border:1px solid #bbb;border-radius:6px}
+#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:7px;display:none;z-index:100}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:8px}.pic{height:180px}.logo{width:100%}.search{order:3;flex-basis:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class="top">
+<div class="logo">BRAHUBB</div>
+<input id="search" class="search" placeholder="Search products..." oninput="render()">
+<button class="cartBtn" onclick="openCart()">Cart (<span id="cartCount">0</span>)</button>
+</div>
+<div id="categories" class="categories"></div>
+</header>
+
+<main>
+<section class="hero"><h1>Shop on BRAHUBB</h1><p>Fashion, electronics, lifestyle and more.</p></section>
+<div id="grid" class="grid"></div>
+</main>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div id="modalBox" class="box"></div></div>
+<div id="toast"></div>
+
+<script>
+const products = [
+{id:1,name:"Smartphone",category:"Electronics",price:14999,mrp:19999,image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"},
+{id:2,name:"Wireless Headphones",category:"Electronics",price:1999,mrp:3999,image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"},
+{id:3,name:"Smart Watch",category:"Electronics",price:2999,mrp:5999,image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800"},
+{id:4,name:"Sneakers",category:"Fashion",price:2499,mrp:4999,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"},
+{id:5,name:"Backpack",category:"Fashion",price:1299,mrp:2499,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"},
+{id:6,name:"Sunglasses",category:"Fashion",price:799,mrp:1599,image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800"},
+{id:7,name:"Classic T-Shirt",category:"Fashion",price:699,mrp:1299,image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800"},
+{id:8,name:"Running Shoes",category:"Fashion",price:1899,mrp:3499,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"},
+{id:9,name:"Laptop",category:"Electronics",price:45999,mrp:55999,image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800"},
+{id:10,name:"Travel Bag",category:"Fashion",price:1599,mrp:2999,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"},
+{id:11,name:"Bluetooth Speaker",category:"Electronics",price:1499,mrp:2499,image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800"},
+{id:12,name:"Camera",category:"Electronics",price:32999,mrp:39999,image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800"}
+];
+
+let cart = JSON.parse(localStorage.getItem("brahubb_cart") || "[]");
+let category = "";
+
+function money(n){return "₹"+Number(n).toLocaleString("en-IN");}
+
+function renderCategories(){
+  const cats=["All",...new Set(products.map(p=>p.category))];
+  document.getElementById("categories").innerHTML="";
+  cats.forEach(c=>{
+    const b=document.createElement("button");
+    b.textContent=c;
+    b.onclick=()=>{category=c==="All"?"":c;render();};
+    document.getElementById("categories").appendChild(b);
+  });
+}
+
+function render(){
+  renderCategories();
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const list=products.filter(p=>
+    (!category||p.category===category) && p.name.toLowerCase().includes(q)
+  );
+  const grid=document.getElementById("grid");
+  grid.innerHTML="";
+  list.forEach(p=>{
+    const card=document.createElement("article");
+    card.className="card";
+    card.innerHTML=
+      '<img class="pic" src="'+p.image+'" alt="'+p.name+'">'+
+      '<div class="info">'+
+      '<div class="cat">'+p.category+'</div>'+
+      '<div class="name">'+p.name+'</div>'+
+      '<div class="rating">★ 4.3 · 120 reviews</div>'+
+      '<div class="price">'+money(p.price)+' <span class="mrp">'+money(p.mrp)+'</span></div>'+
+      '<button class="add">Add to Cart</button></div>';
+    card.onclick=function(){showProduct(p.id);};
+    card.querySelector(".add").onclick=function(e){e.stopPropagation();addToCart(p.id);};
+    grid.appendChild(card);
+  });
+}
+
+function saveCart(){
+  localStorage.setItem("brahubb_cart",JSON.stringify(cart));
+  document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
+}
+function toast(msg){
+  const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";
+  clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",1300);
+}
+function addToCart(id){
+  const x=cart.find(i=>i.id===id);
+  if(x)x.qty++;else cart.push({id:id,qty:1});
+  saveCart();toast("Added to cart");
+}
+function showProduct(id){
+  const p=products.find(x=>x.id===id);
+  document.getElementById("modalBox").innerHTML=
+    '<button class="close" onclick="closeModal()">×</button>'+
+    '<img class="detailImg" src="'+p.image+'" alt="">'+
+    '<h2>'+p.name+'</h2><p>'+p.category+'</p><h2>'+money(p.price)+'</h2>'+
+    '<p>★ 4.3 · 120 reviews</p><button class="primary" onclick="addToCart('+p.id+');closeModal()">Add to Cart</button>';
+  openModal();
+}
+function openCart(){
+  let total=0,html='<button class="close" onclick="closeModal()">×</button><h2>Your Cart</h2>';
+  if(!cart.length){html+='<p>Your cart is empty.</p>';}
+  cart.forEach(item=>{
+    const p=products.find(x=>x.id===item.id);if(!p)return;
+    total+=p.price*item.qty;
+    html+='<div class="line"><b>'+p.name+'</b><br>'+money(p.price)+' × '+item.qty+
+    '<div class="qty"><button onclick="changeQty('+p.id+',-1);openCart()">−</button> '+
+    item.qty+' <button onclick="changeQty('+p.id+',1);openCart()">+</button></div></div>';
+  });
+  if(cart.length)html+='<h2>Total: '+money(total)+'</h2><button class="primary" onclick="checkout()">Proceed to Order</button>';
+  document.getElementById("modalBox").innerHTML=html;openModal();
+}
+function changeQty(id,d){
+  const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;
+  if(x.qty<=0)cart=cart.filter(i=>i.id!==id);saveCart();
+}
+function checkout(){
+  document.getElementById("modalBox").innerHTML=
+  '<button class="close" onclick="closeModal()">×</button><h2>Delivery Details</h2>'+
+  '<input id="customerName" class="field" placeholder="Full name">'+
+  '<input id="customerPhone" class="field" placeholder="Mobile number">'+
+  '<textarea id="customerAddress" class="field" placeholder="Full delivery address"></textarea>'+
+  '<button class="primary" onclick="placeOrder()">Place COD Order</button>';
+}
+function placeOrder(){
+  const n=document.getElementById("customerName").value.trim();
+  const ph=document.getElementById("customerPhone").value.trim();
+  const ad=document.getElementById("customerAddress").value.trim();
+  if(!n||!ph||!ad){alert("Please fill all details");return;}
+  const orderNo="BRH"+Date.now();
+  const order={orderNo:orderNo,name:n,phone:ph,address:ad,items:cart,date:new Date().toISOString()};
+  localStorage.setItem("brahubb_last_order",JSON.stringify(order));
+  cart=[];saveCart();
+  document.getElementById("modalBox").innerHTML='<h2>Order Received</h2><p>Order ID: <b>'+orderNo+'</b></p><p>Status: Pending</p><button class="primary" onclick="closeModal()">Continue Shopping</button>';
+}
+function openModal(){document.getElementById("modal").style.display="flex";}
+function closeModal(){document.getElementById("modal").style.display="none";}
+
+saveCart();
+render();
+</script>
+</body>
+</html>
